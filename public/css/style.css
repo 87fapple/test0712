@@ -1,0 +1,184 @@
+body {
+    background-image: url("../img/background_clound.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-width: 576px;
+    font-family: 'Bruno Ace', cursive;
+    /* font-family: 'Comic Neue', cursive; */
+}
+
+#bodyContainer {
+    background-color: rgba(7, 136, 211, 0.501);
+}
+
+#today {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+#city {
+    max-width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 10px;
+}
+
+
+#todayWeather {
+    background-image: url("../img/bgLeft.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 55%;
+    max-width: 55%;
+    max-height: 85%;
+    position: absolute;
+    left: 3%;
+    margin-top: 3%;
+}
+
+#todayLeft {
+    max-width: 776px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#firstImg {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+}
+
+#firstImg>img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+#twoday {
+    width: 100%;
+    height: 15%;
+    background-color: rgb(255, 255, 255);
+}
+
+
+#aWeek {
+    width: 100%;
+    height: 15%;
+    background-color: rgb(255, 255, 255);
+    white-space: nowrap;
+    overflow: auto;
+    padding-top: 5px;
+}
+
+#todayNight {
+    border-style: solid;
+    border-color: black;
+    border-width: 0 2px 0 2px;
+}
+
+#returnTop {
+    position: fixed;
+    right: 1vw;
+    bottom: 1vw;
+}
+
+#timeNow,
+.eletitle {
+    font-size: 1vw;
+}
+
+.eleValue {
+    font-size: 3vw;
+}
+
+.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.twoInfo {
+    display: flex;
+    justify-content: center;
+}
+
+.data {
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 4px;
+    text-align: center;
+}
+
+.data>img {
+    width: 80%;
+    height: 95%;
+}
+
+@media screen and (max-width:850px) {
+    .eletitle {
+        font-size: 0.5vw;
+    }
+
+    .eleValue {
+        font-size: 2vw;
+    }
+
+    #firstImg>img {
+        height: 80%;
+    }
+}
+
+@media screen and (width <= 768px) and (width >= 500px) {
+    .spEleValue {
+        font-size: 1.99vw;
+    }
+}
+
+@media screen and (max-width:777px) {
+    .eleValue {
+        font-size: 2vw;
+    }
+
+    #firstImg>div>div>div>img {
+        width: 20%;
+        height: 30%;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .eleValue {
+        font-size: 3vw;
+    }
+
+    .twoInfo {
+        display: block;
+        justify-content: center;
+    }
+
+    .secPic {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .secPic>div>img {
+        width: 20%;
+        height: 50%;
+    }
+
+    .twoBorder {
+        border-right: 1px solid black;
+    }
+}
+
+@media screen and (min-width:1250px) {
+    #firstImg {
+        grid-template-columns: 0.7fr 1.3fr;
+    }
+
+    .eleValue {
+        font-size: 2vw;
+    }
+}

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Comic+Neue:wght@300&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/JavaScript" src="https://MomentJS.com/downloads/moment-with-locales.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container mt-5 border border-info rounded text-light" id="bodyContainer">
+        <div class="d-flex">
+            <h1>天氣預報</h1>
+            <button class="ml-auto btn btn-outline-warning btn-xxs mt-1"><a href="#aWeekLink"
+                    class="text-decoration-none" style="color: white;">一周預報</a></button>
+        </div>
+        <h5 class="mt-4">選擇縣市</h5>
+        <select name="location" class="form-control select form-control-lg" id="theSelect">
+            <optgroup label="北部">
+                <option value="臺北市">臺北市</option>
+                <option value="新北市">新北市</option>
+                <option value="基隆市">基隆市</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="桃園市">桃園市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="新竹市">新竹市</option>
+            </optgroup>
+            <optgroup label="中部">
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="臺中市" selected>臺中市</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+            </optgroup>
+            <optgroup label="南部">
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="臺南市">臺南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="屏東縣">屏東縣</option>
+            </optgroup>
+            <optgroup label="東部">
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="臺東縣">臺東縣</option>
+            </optgroup>
+            <optgroup label="外島">
+                <option value="金門縣">金門縣</option>
+                <option value="連江縣">連江縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+            </optgroup>
+        </select>
+
+        <div id="today" class="mt-3 mb-3 d-flex">
+            <img src="./pic/臺中市.jpg" id="city" class="img-fluid">
+            <div class="rounded" id="todayWeather">
+                <div class="p-2" id="todayLeft">
+                    <div id="timeNow"></div>
+                    <div id="firstImg">
+                        <img class="img-fluid" src="./D_back/rain.png">
+                        <div class="row-column">
+                            <div class="row">
+                                <div class="col-4 pb-2 pb-sm-0">
+                                    <div class="eletitle">溫度</div>
+                                    <div class="eleValue">40°C</div>
+                                </div>
+                                <div class="col-7 eletitle text-left text-nowrap">
+                                    <div class="eletitle">&nbsp;</div>
+                                    <img width="30" height="30"
+                                        src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png" alt="blur" />降雨率
+                                    <span class="eleValue">50</span>
+                                    <span class="eletitle">%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="p-sm-0">
+                                    <div class="eletitle">天氣</div>
+                                    <div class="eleValue text-nowrap">多雲多雲多雲</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5>兩日預報</h5>
+        <div id="twoday" class="mb-3 rounded text-dark">
+            <div class="two p-3 text-center">
+                <div>
+                    <h5 class="">今晚明晨</h5>
+                    <div class="twoInfo">
+                        <img src="./D_back/thunder.png" class="img-fluid pr-lg-3">
+                        <div class="mt-sm-3 eleValue secPic">
+                            <div class="twoBorder">55°C</div>
+                            <div class="">
+                                <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                                    alt="blur" />50%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="">明日白天</h5>
+                    <div class="twoInfo" id="todayNight">
+                        <img src="./D_back/thunder.png" class="img-fluid pr-lg-3">
+                        <div class="mt-sm-3 eleValue secPic">
+                            <div class="twoBorder">55°C</div>
+                            <div class="">
+                                <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                                    alt="blur" />50%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="">明晚後日晨</h5>
+                    <div class="twoInfo">
+                        <img src="./D_back/thunder.png" class="img-fluid pr-lg-3">
+                        <div class="mt-sm-3 eleValue secPic">
+                            <div class="twoBorder">55°C</div>
+                            <div class="">
+                                <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                                    alt="blur" />50%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5 id="aWeekLink">一周預報</h5>
+        <div id="aWeek" class="mb-3 rounded text-dark text-center">
+            <div class="data">
+                <p class="mb-0" style="text-align: center;">5/24</p>
+               <img src="./D_back/clound_many.png">
+                 <p>
+                    <span>溫度</span>
+                    <span class="ml-2">
+                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                            alt="blur" />10%
+                    </span>
+                </p>
+            </div>
+            <div class="data">
+                <p class="mb-0" style="text-align: center;">5/24</p>
+                <img src="./D_back/clound.png">
+                <p>
+                    <span>溫度</span>
+                    <span class="ml-2">
+                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                            alt="blur" />10%
+                    </span>
+                </p>
+            </div>
+            <div class="data">
+                <p class="mb-0 pt-0" style="text-align: center;">5/24</p>
+                <img src="./D_back/clound_many.png">
+                <p>
+                    <span>溫度</span>
+                    <span class="ml-2">
+                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                            alt="blur" />10%
+                    </span>
+                </p>
+            </div>
+            <div class="data">
+                <p class="mb-0" style="text-align: center;">5/24</p>
+                <img src="./D_back/rain.png">
+                <p>
+                    <span>溫度</span>
+                    <span class="ml-2">
+                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                            alt="blur" />10%
+                    </span>
+                </p>
+            </div>
+            <div class="data">
+                <p class="mb-0" style="text-align: center;">5/24</p>
+                <img src="./D_back/thunder.png">
+                <p>
+                    <span>溫度</span>
+                    <span class="ml-2">
+                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                            alt="blur" />10%
+                    </span>
+                </p>
+            </div>
+            <div class="data">
+                <p class="mb-0" style="text-align: center;">5/24</p>
+                <img src="./D_back/clound_many.png">
+                <p>
+                    <span>溫度</span>
+                    <span class="ml-2">
+                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                            alt="blur" />10%
+                    </span>
+                </p>
+            </div>
+            <div class="data">
+                <p class="mb-0" style="text-align: center;">5/24</p>
+                <img src="./D_back/clound_many.png">
+                <p>
+                    <span>溫度</span>
+                    <span class="ml-2">
+                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                            alt="blur" />10%
+                    </span>
+                </p>
+            </div>
+            <div class="data">
+                <p class="mb-0" style="text-align: center;">5/24</p>
+                <img src="./D_back/clound_many.png">
+                <p>
+                    <span>溫度</span>
+                    <span class="ml-2">
+                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                            alt="blur" />10%
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <table id="aWeekInfo" class="table table-striped table-hover text-light text-center">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>時間</th>
+                    <th>天氣</th>
+                    <th>平均溫度</th>
+                    <th>降雨率</th>
+                    <th>濕度</th>
+                    <th title="紫外線係數"><a style="color: rebeccapurple;"
+                            href="https://zh.wikipedia.org/zh-tw/%E7%B4%AB%E5%A4%96%E7%BA%BF%E6%8C%87%E6%95%B0"
+                            target="_blank" class="text-decoration-none">
+                            紫外線</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-exclamation-circle pb-1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                        </svg>
+                    </th>
+
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td style="height: 70px; width: 75px;"><img src="./D_back/404.png" class="h-100 w-100"></td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="bg-white">
+            <canvas id="chartCanvas"></canvas>
+        </div>
+
+        <a href="#">
+            <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/circled-up.png" alt="circled-up"
+                id="returnTop" />
+        </a>
+    </div>
+
+    <script>
+
+        var todoTable = [];
+        var aweekTable = [];
+        var localInfo = { selectName: "臺中市", localId: 20 };
+        var objNow = {};
+        var objTodayNight = {};
+        var objTomorrow = {};
+        var objTomNight = {};
+        var aweekDate = [{}];
+        var objAweekToday = [{}];
+        var dataUrl = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=CWB-B49B9DCF-7BB9-4300-8452-B146577EE1AE&elementName=Wx,T,PoP6h";
+        var dataWeekUrl = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-B49B9DCF-7BB9-4300-8452-B146577EE1AE&elementName=UVI,PoP12h,T,RH,Wx";
+
+        var date = moment().format("MM-DD");
+        var now = moment().format("Y-MM-DD HH:mm:ss");
+        var todayNight = moment().add(24, 'hour').format("DD");
+        var tomorrow = moment().add(1, 'day').format("Y-MM-DD 12:00:00");
+        var tomNight = moment().add(48, 'hour').format("DD");
+
+
+        function getdata() {
+            $.ajax({
+                url: dataUrl,
+                method: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    data = res.records.locations[0].location;
+                    twoData(data);
+                }
+            })
+            function twoData(data) {
+                todoTable = data;
+                selectName = localInfo.selectName;
+
+                for (var local = 0; local < 22; local++) {
+                    if (selectName == todoTable[local].locationName) {
+                        localInfo.localId = local;
+                    }
+                }
+                console.log(selectName);
+                // console.log(todoTable[0].locationName); // 縣市名
+                // console.log(todoTable[0].weatherElement[0].elementName);  // Wx:天氣
+                // console.log(todoTable[localInfo.localId].weatherElement[0].time);  // time
+                // console.log(todoTable[0].weatherElement[0].time[2].elementValue[0].value);  // Value:天氣值
+                // console.log(todoTable[0].weatherElement[1].time);  // T:溫度
+                // console.log(todoTable[0].weatherElement[2].elementName);  // PoP6h:降雨率
+                // console.log(todoTable[0].weatherElement[2].time);  // PoP6h:降雨率
+                // 取得天氣
+                timeStepWx = todoTable[localInfo.localId].weatherElement[0].time;
+                timeStepWx.forEach(function (e, index) {
+                    let dayS = e.endTime.split(" ");
+                    let dayS2 = dayS[0].split("-");
+
+                    if (e.startTime < now && now < e.endTime) {
+                        objNow.Wx = e.elementValue[0].value;
+                        objNow.WxNum = e.elementValue[1].value;
+                    }
+
+                    if (dayS2[2] == todayNight && dayS[1] == "00:00:00") {
+                        objTodayNight.Wx = e.elementValue[0].value;
+                        objTodayNight.WxNum = e.elementValue[1].value;
+                    }
+
+                    if (e.endTime == tomorrow) {
+                        objTomorrow.Wx = e.elementValue[0].value;
+                        objTomorrow.WxNum = e.elementValue[1].value;
+                    }
+
+                    if (dayS2[2] == tomNight && dayS[1] == "00:00:00") {
+                        objTomNight.Wx = e.elementValue[0].value;
+                        objTomNight.WxNum = e.elementValue[1].value;
+                    }
+                });
+
+                // 取得溫度
+                timeStepT = todoTable[localInfo.localId].weatherElement[1].time;
+                timeStepT.forEach(function (e, index) {
+
+                    let dayS = e.dataTime.split(" ");
+                    let dayS2 = dayS[0].split("-");
+
+                    if (e.dataTime < now && now < timeStepT[index + 1].dataTime) {
+                        objNow.T = e.elementValue[0].value;
+                    }
+
+                    if (dayS2[2] == todayNight && dayS[1] == "00:00:00") {
+                        objTodayNight.T = e.elementValue[0].value;
+                    }
+
+                    if (e.dataTime == tomorrow) {
+                        objTomorrow.T = e.elementValue[0].value;
+                    }
+
+                    if (dayS2[2] == tomNight && dayS[1] == "00:00:00") {
+                        objTomNight.T = e.elementValue[0].value;
+                    }
+                });
+
+                // 取得降雨率
+                timeStepPop = todoTable[localInfo.localId].weatherElement[2].time;
+                timeStepPop.forEach(function (e, index) {
+                    let dayS = e.endTime.split(" ");
+                    let dayS2 = dayS[0].split("-");
+
+                    if (e.startTime < now && now < e.endTime) {
+                        objNow.PoP = e.elementValue[0].value;
+                    }
+
+                    if (dayS2[2] == todayNight && dayS[1] == "00:00:00") {
+                        objTodayNight.PoP = e.elementValue[0].value;
+                    }
+
+                    if (e.endTime == tomorrow) {
+                        objTomorrow.PoP = e.elementValue[0].value;
+                    }
+
+                    if (dayS2[2] == tomNight && dayS[1] == "00:00:00") {
+                        objTomNight.PoP = e.elementValue[0].value;
+                    }
+                })
+
+                // console.log(objNow);
+                // console.log(objTodayNight);
+                // console.log(objTomorrow);
+                // console.log(objTomNight);
+
+                var list = `
+                <img src="./pic/${selectName}.jpg" id="city" class="img-fluid">
+                <div class="rounded" id="todayWeather">
+                    <div class="p-2" id="todayLeft">
+                        <div id="timeNow"></div>
+                        <div id="firstImg">
+                            <img class="img-fluid" src="./D_back/${SwitchWx(objNow.WxNum)}.png">
+                            <div class="row-column">
+                                <div class="row">
+                                    <div class="col-4 pb-2 pb-sm-0">
+                                        <div class="eletitle">溫度</div>
+                                        <div class="eleValue">${objNow.T}°C</div>
+                                    </div>
+                                    <div class="col-7 eletitle text-left text-nowrap">
+                                        <div class="eletitle">&nbsp;</div>
+                                        <img width="30" height="30"
+                                            src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png" alt="blur" />
+                                            降雨率
+                                            <span class="eleValue spEleValue">${objNow.PoP}</span>
+                                            <span class="eletitle">%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="p-sm-0">
+                                        <div class="eletitle">天氣</div>
+                                        <div class="eleValue text-nowrap">${objNow.Wx}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                var twodayList = `
+                <div class="two p-3 text-center">
+                <div>
+                    <h5 class="">今晚明晨</h5>
+                    <div class="twoInfo">
+                        <img src="./D_back/${SwitchWx(objTodayNight.WxNum)}.png" class="img-fluid pr-lg-3">
+                        <div class="mt-sm-3 eleValue secPic">
+                            <div class="twoBorder spEleValue">${objTodayNight.T}°C</div>
+                            <div class="spEleValue">
+                                <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                                    alt="blur" />${objTodayNight.PoP}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="">明日白天</h5>
+                    <div class="twoInfo" id="todayNight">
+                        <img src="./D_back/${SwitchWx(objTomorrow.WxNum)}.png" class="img-fluid pr-lg-3">
+                        <div class="mt-sm-3 eleValue secPic">
+                            <div class="twoBorder spEleValue">${objTomorrow.T}°C</div>
+                            <div class="spEleValue">
+                                <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                                    alt="blur" />${objTomorrow.PoP}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="">明晚後日晨</h5>
+                    <div class="twoInfo">
+                        <img src="./D_back/${SwitchWx(objTomNight.WxNum)}.png" class="img-fluid pr-lg-3">
+                        <div class="mt-sm-3 eleValue secPic">
+                            <div class="twoBorder spEleValue">${objTomNight.T}°C</div>
+                            <div class="spEleValue">
+                                <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                                    alt="blur" />${objTomNight.PoP}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+
+                $("#today").html(list);
+                $("#twoday").html(twodayList);
+
+                displayTime();
+            }
+
+            $.ajax({
+                url: dataWeekUrl,
+                method: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    data = res.records.locations[0].location;
+                    aweekData(data);
+                }
+            })
+            function aweekData(data) {
+                aweekTable = data;
+
+                selectName = localInfo.selectName;
+
+                for (var local = 0; local < 22; local++) {
+                    if (selectName == aweekTable[local].locationName) {
+                        localInfo.localId = local;
+                    }
+                }
+                aweekWeatherEl = aweekTable[localInfo.localId].weatherElement;
+                aweekWeatherEl.forEach(function (e, index) {
+                    var aweekWeatherTime = e.time;
+                    if (e.elementName == "PoP12h") {
+                        aweekArray(aweekWeatherTime, e.elementName);
+                    }
+                    if (e.elementName == "T") {
+                        aweekArray(aweekWeatherTime, e.elementName);
+                    }
+                    if (e.elementName == "RH") {
+                        aweekArray(aweekWeatherTime, e.elementName);
+                    }
+                    if (e.elementName == "Wx") {
+                        aweekArray(aweekWeatherTime, e.elementName);
+                    }
+                    if (e.elementName == "UVI") {
+                        UVIdata(aweekWeatherTime);
+                    }
+                })
+
+                function aweekArray(aweekWeatherTime, eLe) {
+                    dateList();
+                    aweekWeatherTime.forEach(function (e, index) {
+                        let dayS = e.startTime.split(" ");
+
+                        for (let step = 0; step < 8; step++) {
+                            if (dayS[0] == aweekDate[step]) {
+                                if (eLe == "PoP12h") {
+                                    objAweekToday[index] = {};
+                                    objAweekToday[index].date = e.startTime;
+                                    if (e.elementValue[0].value == " ") {
+                                        objAweekToday[index].PoP = "--";
+                                    } else {
+                                        objAweekToday[index].PoP = e.elementValue[0].value;
+                                    }
+                                }
+                                if (eLe == "T") {
+                                    objAweekToday[index].T = e.elementValue[0].value;
+                                }
+                                if (eLe == "RH") {
+                                    objAweekToday[index].RH = e.elementValue[0].value;
+                                }
+                                if (eLe == "Wx") {
+                                    objAweekToday[index].Wx = e.elementValue[0].value;
+                                    objAweekToday[index].WxNum = e.elementValue[1].value;
+                                }
+                            }
+                        }
+                    })
+                }
+
+                function UVIdata(aweekWeatherTime) {
+                    objAweekToday.forEach(function (e, index) {
+                        aweekWeatherTime.forEach(function (e2, step) {
+                            let dayS = e.date.split(" ");
+                            let UVIdayS = e2.endTime.split(" ");
+
+                            if (dayS[0] == UVIdayS[0]) {
+                                e.UVI = e2.elementValue[0].value;;
+                            }
+                        })
+                        if (!e.UVI) {
+                            objAweekToday[index].UVI = "--";
+                        }
+                    })
+
+                }
+
+
+                $("#aWeek").empty();
+                objAweekToday.forEach(function (e, index) {
+                    let dayS = e.date.split(" ");
+                    let dayS2 = dayS[0].split("-");
+
+                    if (dayS[1] == "18:00:00") {
+                        let showDate = dayS[0];
+
+                        var aweekList = `                
+                        <div class="data">
+                            <p class="mb-0" style="text-align: center;">${dayS2[1]}/${dayS2[2]}</p>
+                            <img src="./D_back/${SwitchWx(e.WxNum)}.png">
+                            <p>
+                                <span>${e.T}°C</span>
+                                <span class="ml-2">
+                                <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/0000FF/blur.png"
+                                alt="blur" />${e.PoP}%</span>
+                            </p>
+                        </div>
+                        `;
+                        $("#aWeek").append(aweekList);
+                    }
+                })
+
+
+                $("#aWeekInfo tbody").empty();
+                objAweekToday.forEach(function (e, index) {
+                    let dayS = e.date.split(" ");
+                    let dayS2 = dayS[0].split("-");
+                    let dayS3 = dayS[1].split(":");
+
+                    var aweekInfoList = `
+                    <tbody>
+                        <tr>
+                            <td>${dayS2[1]}-${dayS2[2]}</td>
+                            <td>${dayS3[0]}:${dayS3[1]}</td>
+                            <td style="height: 70px; width: 75px;"><img src="./D_back/${SwitchWx(e.WxNum)}.png" class="h-100 w-100"></td>
+                            <td>${e.T}°C</td>
+                            <td>${e.PoP}%</td>
+                            <td>${e.RH}%</td>
+                            <td>${e.UVI}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    `;
+                    $("#aWeekInfo").append(aweekInfoList);
+                })
+
+                chartWeather(objAweekToday);
+            }
+        }
+
+        getdata();
+
+        $("#theSelect").on("change", function () {
+            localInfo.selectName = $("#theSelect").val();
+            getdata();
+        });
+        function displayTime() {
+            var time = new Date().toLocaleString();
+            time = time.split(" ");
+            time = time[1].split(":");
+            timeNow.innerHTML = time[0] + ":" + time[1];
+            setInterval(displayTime, 30000);
+        }
+        function SwitchWx(index) {
+            index = Number(index);
+            if (index == 1) {
+                return "sunny";
+            }
+            else if (index >= 2 && index <= 4) {
+                return "clound_many";
+            }
+            else if (index >= 5 && index <= 7) {
+                return "clound";
+            }
+            else if ((index >= 8 && index <= 14) || (index >= 29 && index <= 32)) {
+                return "rain";
+            }
+            else if ((index >= 15 && index <= 28) || (index >= 33 && index <= 41)) {
+                return "thunder";
+            }
+            else if (index == 42) {
+                return "snow";
+            }
+            else {
+                return "404";
+            }
+        }
+        function dateList() {
+            for (let step = 0; step < 8; step++) {
+                var timeTest = moment().add(step, 'day').format("Y-MM-DD");
+                aweekDate[step] = timeTest;
+            }
+        }
+        function chartWeather(objAweekToday) {
+            var dataTList = [];
+            var dataPoPList = [];
+            var labelList = [];
+
+            objAweekToday.forEach(function (e, index) {
+                let dayS = e.date.split(" ");
+                let dayS2 = dayS[0].split("-");
+                let dayS3 = dayS[1].split(":");
+                let dayMerge = dayS2[1] + "-" + dayS2[2] + " " + dayS3[0] + ":" + dayS3[1];
+
+                labelList.push(dayMerge);
+                dataTList.push(e.T);
+                dataPoPList.push(e.PoP);
+            })
+
+            var ctx = document.getElementById("chartCanvas");
+            var labChart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: labelList,
+                    datasets: [
+                        {
+                            label: "溫度",
+                            data: dataTList,
+                            fill: false,
+                            backgroundColor: "orange",
+                            borderColor: "red",
+                            borderWidth: 1
+                        },
+                        {
+                            label: "降雨率",
+                            data: dataPoPList,
+                            fill: true,
+                            backgroundColor: "rgba(0, 0, 255, 0.2)",
+                            borderColor: "blue",
+                            borderWidth: 1,
+                        },
+                    ]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 20,
+                                fontFamily: 'Bruno Ace'
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                fontSize: 25,
+                                fontFamily: 'Bruno Ace'
+                            }
+                        }]
+                    },
+                    legend: {
+                        labels: {
+                            fontSize: 20
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
